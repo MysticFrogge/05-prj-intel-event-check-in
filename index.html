@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,25 +24,15 @@
         </p>
       </div>
     </div>
-    <!-- Attendance tracking -->
-    <div class="attendance-tracker">
-      <div class="attendance-header">
-        <i class="fas fa-users"></i>
-        Attendance: <span id="attendeeCount">0</span>/50
-      </div>
-      <div class="progress-container">
-        <div id="progressBar" class="progress-bar"></div>
-      </div>
-    </div>
-    <div class="container">
-      <!-- Feedback message -->
-      <p id="greeting"></p>
+    <main class="main-grid">
+      <section class="panel-card checkin-panel">
+        <div class="section-label">Attendee check-in</div>
 
-      <!-- Check-in form -->
-      <form class="check-in" id="checkInForm">
-        <label for="attendeeName" class="form-label">Attendee Check-In</label>
-        <div class="form-group">
-          <div class="input-wrapper">
+        <form class="check-in" id="checkInForm">
+          <label for="attendeeName" class="form-label"
+            >Enter attendee details</label
+          >
+          <div class="form-row">
             <input
               type="text"
               id="attendeeName"
@@ -60,28 +50,67 @@
           <button type="submit" id="checkInBtn">
             <i class="fas fa-user-check"></i> Check In
           </button>
-        </div>
-      </form>
+          <p id="greeting"></p>
+        </form>
+      </section>
 
-      <!-- Team stats -->
-      <div class="team-stats">
-        <h3>Team Attendance</h3>
-        <div class="teams-grid">
-          <div class="team-card water">
-            <span class="team-name">🌊 Team Water Wise</span>
-            <span class="team-count" id="waterCount">0</span>
+      <aside class="stats-panel">
+        <section class="panel-card attendance-panel">
+          <div class="section-label">Live attendance</div>
+          <div class="attendance-tracker">
+            <div class="attendance-header">
+              <i class="fas fa-users"></i>
+              Attendance: <span id="attendeeCount">0</span>/50
+            </div>
+            <div class="progress-container">
+              <div id="progressBar" class="progress-bar"></div>
+            </div>
           </div>
-          <div class="team-card zero">
-            <span class="team-name">🌿 Team Net Zero</span>
-            <span class="team-count" id="zeroCount">0</span>
+        </section>
+
+        <section class="panel-card team-stats-panel">
+          <div class="section-label">Team attendance</div>
+          <div class="teams-grid">
+            <div class="team-card water">
+              <div class="team-name">🌊 Team Water Wise</div>
+              <div class="team-count" id="waterCount">0</div>
+            </div>
+            <div class="team-card zero">
+              <div class="team-name">🌿 Team Net Zero</div>
+              <div class="team-count" id="zeroCount">0</div>
+            </div>
+            <div class="team-card power">
+              <div class="team-name">⚡ Team Renewables</div>
+              <div class="team-count" id="powerCount">0</div>
+            </div>
           </div>
-          <div class="team-card power">
-            <span class="team-name">⚡ Team Renewables</span>
-            <span class="team-count" id="powerCount">0</span>
+        </section>
+      </aside>
+
+      <section class="panel-card attendee-list-panel">
+        <div class="section-label">Attendee list</div>
+        <div class="attendee-list">
+          <div class="attendee-column">
+            <div class="attendee-column-label">🌊 Team Water Wise</div>
+            <ul id="waterList" class="attendee-team-list">
+              <li class="empty-team-message">No attendees yet.</li>
+            </ul>
+          </div>
+          <div class="attendee-column">
+            <div class="attendee-column-label">🌿 Team Net Zero</div>
+            <ul id="zeroList" class="attendee-team-list">
+              <li class="empty-team-message">No attendees yet.</li>
+            </ul>
+          </div>
+          <div class="attendee-column">
+            <div class="attendee-column-label">⚡ Team Renewables</div>
+            <ul id="powerList" class="attendee-team-list">
+              <li class="empty-team-message">No attendees yet.</li>
+            </ul>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
     <footer class="footer">
       &copy; 2025 Intel •

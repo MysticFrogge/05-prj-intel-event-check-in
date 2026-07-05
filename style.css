@@ -7,16 +7,126 @@
 
 body {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #eef5fb;
+  color: #1f2937;
   line-height: 1.6;
   min-height: 100vh;
+}
+
+main.main-grid {
+  max-width: none;
+  width: calc(100% - 64px);
+  margin: 32px auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: minmax(430px, 1.2fr) minmax(430px, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.panel-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  box-shadow: 0 32px 90px rgba(15, 23, 42, 0.14);
+  padding: 28px;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.stats-panel {
+  display: grid;
+  gap: 20px;
+  align-content: end;
+  height: 100%;
+}
+
+.checkin-panel {
+  min-height: 360px;
+  min-width: 430px;
+}
+
+.attendance-panel {
+  padding-bottom: 20px;
+}
+
+.team-stats-panel {
+  padding-bottom: 12px;
+}
+
+.attendee-list-panel {
+  grid-column: 1 / -1;
+  min-height: 180px;
+}
+
+.attendee-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  min-height: 120px;
+}
+
+.attendee-column {
+  background-color: rgba(240, 248, 255, 0.9);
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 180px;
+}
+
+.attendee-column-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #0c4a85;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.attendee-team-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.attendee-team-list li {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(0, 113, 197, 0.08);
+  color: #1f2937;
+  font-size: 15px;
+  text-align: center;
+}
+
+.empty-team-message {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+  text-align: center;
+}
+
+.empty-list {
+  margin: 0;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.section-label {
+  display: block;
+  margin: 0 auto 18px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  color: #0c4a85;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 /* Add form label styling */
 .form-label {
   display: block;
-  text-align: left;
+  text-align: center;
   margin-bottom: 15px;
   color: #475569;
   padding-left: 5px;
@@ -25,7 +135,8 @@ body {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(
+  background:
+    linear-gradient(
       135deg,
       rgba(0, 153, 219, 0.9) 0%,
       rgba(0, 104, 181, 0.9) 50%,
@@ -77,35 +188,31 @@ body {
 
 /* Main container */
 .container {
-  max-width: 700px;
-  width: 90%;
-  margin: 0 auto 20px;
-  padding: 26px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 5px 24px rgba(0, 60, 116, 0.07);
-  text-align: center;
+  display: none;
 }
 
 /* Check-in form */
 .check-in {
   width: 100%;
   margin: 0 auto;
-  padding: 30px;
-  background-color: #f8fafc;
-  border-radius: 16px;
-  text-align: center;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  text-align: left;
 }
 
-.form-group {
-  display: flex;
+.form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
   gap: 15px;
   width: 100%;
+  margin-bottom: 18px;
 }
 
 /* Form elements */
-input {
-  flex: 1;
+input,
+select {
+  width: 100%;
   padding: 16px 20px;
   border: 2px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
@@ -129,8 +236,9 @@ button {
   border: none;
   border-radius: 12px;
   padding: 0 28px;
-  min-width: 160px;
-  height: 56px;
+  width: 100%;
+  min-width: 0;
+  height: 60px;
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
@@ -145,6 +253,31 @@ button:hover {
   background-color: #005a9e;
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 113, 197, 0.3);
+}
+
+button:disabled,
+button[disabled] {
+  background-color: #a8b5c8;
+  color: #f1f5f9;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.celebrate-button {
+  animation: button-pop 0.35s ease;
+}
+
+.celebrate-piece {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  animation: confetti-pop 0.7s ease-out forwards;
 }
 
 #checkInBtn {
@@ -172,18 +305,15 @@ button .fas {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  margin-bottom: 15px;
-  font-size: 17px;
-  color: #64748b;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 16px;
+  color: #475569;
 }
 
-/* Attendance tracker styling */
 .attendance-tracker {
-  max-width: 700px;
-  width: 90%;
-  margin: 0 auto 40px;
-  padding: 0 20px;
+  width: 100%;
+  padding: 0;
   text-align: center;
 }
 
@@ -245,11 +375,13 @@ button .fas {
 /* Messages */
 #greeting {
   font-weight: 500;
-  font-size: 18px;
-  padding: 16px 20px;
+  font-size: 20px;
+  line-height: 1.4;
+  padding: 12px 16px;
   border-radius: 8px;
   color: #333;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  text-align: center;
   display: none;
 }
 
@@ -293,6 +425,7 @@ button .fas {
 }
 
 select {
+  flex: 0 0 170px;
   padding: 16px;
   border: 2px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
@@ -304,31 +437,79 @@ select {
   min-width: 140px;
 }
 
+@keyframes button-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes confetti-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1);
+    opacity: 0;
+  }
+}
+
 /* Team Stats */
-.team-stats {
-  margin-top: 30px;
-  padding-top: 30px;
-  border-top: 2px solid #f1f5f9;
+.team-stats-panel {
+  margin: 0;
 }
 
 .team-stats h3 {
-  color: #64748b;
-  font-size: 16px;
-  margin-bottom: 20px;
+  color: #475569;
+  font-size: 17px;
+  margin-bottom: 18px;
 }
 
 .teams-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
 }
 
 .team-card {
-  padding: 15px;
+  width: 100%;
+  max-width: 280px;
+  padding: 22px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 130px;
+  min-width: 220px;
+}
+
+.team-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.team-count {
+  display: block;
+  font-size: 34px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 8px;
 }
 
 /* Team card colors */
@@ -340,6 +521,31 @@ select {
 }
 .team-card.power {
   background-color: #fff7ed;
+}
+
+.team-card.winner {
+  transform: scale(1.02);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.16);
+}
+.team-card.winner.water {
+  background-color: #bee4fb;
+}
+.team-card.winner.zero {
+  background-color: #cff7de;
+}
+.team-card.winner.power {
+  background-color: #ffe9cd;
+}
+
+.team-card.winner .team-name {
+  color: #0b3a5b;
+}
+
+.team-card.winner .team-count::before {
+  content: "👑";
+  display: block;
+  font-size: 22px;
+  margin-bottom: 8px;
 }
 
 .team-name {
